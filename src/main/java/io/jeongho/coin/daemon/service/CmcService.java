@@ -1,6 +1,7 @@
 package io.jeongho.coin.daemon.service;
 import io.jeongho.coin.daemon.DaemonConstants;
 import io.jeongho.coin.daemon.beans.CoinInfoCMC;
+import io.jeongho.coin.daemon.config.CommonValues;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -30,8 +31,8 @@ public class CmcService {
 	private CommonService commonService;
 
 	@Autowired
-    private Environment environment;
-	
+	private CommonValues commonValues;
+
 	@Autowired
 	@Qualifier(DaemonConstants.DB_SOURCE_COIN_STATION)
 	private SqlSession SqlSession;
@@ -46,7 +47,7 @@ public class CmcService {
 	 */
 	public void updateCoinInfo(){
 		HttpGet http = new HttpGet(DaemonConstants.API_COIN_MARKET_CAP_LIST);
-		commonService.setHeadersHasKey(http, DaemonConstants.API_COIN_MARKET_CAP_HEADER_API_KEY, DaemonConstants.API_COIN_MARKET_CAP_HEADER_API_KEY_VALUE);
+		commonService.setHeadersHasKey(http, DaemonConstants.API_COIN_MARKET_CAP_HEADER_API_KEY, commonValues.getValue("cmc.api.key"));
 
 		List<Map<String,Object>> cMapList = new ArrayList<Map<String,Object>>();
 		try (CloseableHttpClient httpclient = HttpClients.custom().build(); CloseableHttpResponse response = httpclient.execute(http)) {

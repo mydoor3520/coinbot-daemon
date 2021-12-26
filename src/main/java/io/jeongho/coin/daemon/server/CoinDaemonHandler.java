@@ -17,7 +17,7 @@ public class CoinDaemonHandler {
 	/**
 	 * 코인마켓캡의 코인 정보 검색 및 push
 	 */
-	@Scheduled(fixedDelay = 2400000, initialDelay = 3000)
+	@Scheduled(fixedDelay = 7200000, initialDelay = 3000)
 	public void updateCoinLists() {
 		listener.updateCoinInfo();
 	}
