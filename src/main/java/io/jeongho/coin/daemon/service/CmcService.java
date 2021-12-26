@@ -61,9 +61,10 @@ public class CmcService {
 		}
 		List<CoinInfoCMC> cList = new ArrayList<CoinInfoCMC>();
 		int lth = 0;
-		for(Map<String,Object> m : cMapList){
-			CoinInfoCMC c = new CoinInfoCMC();
 
+		CoinInfoCMC c;
+		for(Map<String,Object> m : cMapList){
+			c = new CoinInfoCMC();
 			c.setId(Integer.parseInt(m.get("id").toString()));
 			c.setName(m.get("name").toString());
 			c.setSymbol(m.get("symbol").toString());
