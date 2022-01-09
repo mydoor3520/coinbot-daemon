@@ -3,6 +3,7 @@ package io.jeongho.coin.daemon.server;
 import io.jeongho.coin.daemon.DaemonConstants;
 import io.jeongho.coin.daemon.beans.CoinInfoCMC;
 import io.jeongho.coin.daemon.service.CmcService;
+import io.jeongho.coin.daemon.service.InfoService;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,8 @@ public class CoinDaemonListener {
 	@Autowired
 	private CmcService cmcService;
 
-	@Value("${cmc.api.key}")
-	private String apiKey;
+	@Autowired
+	private InfoService infoService;
 	
 	@Transactional
 	public CoinInfoCMC getCoinInfo() {
@@ -46,4 +47,9 @@ public class CoinDaemonListener {
 		cmcService.updateCoinInfo();
 	}
 
+	@Transactional
+	public void updateForex() {
+		// 환율정보 업데이트
+		infoService.updateForex();
+	}
 }

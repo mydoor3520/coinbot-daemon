@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="forex">
+
+	<!-- 환율정보 업데이트 -->
+	<update id="updateForex" >
+		UPDATE tb_forex TF SET TF.base_price = #{base_price}, TF.change_price = #{change_price}, TF.change = #{change} WHERE TF.currency_code = 'USD';
+	</update>
+
+</mapper>
