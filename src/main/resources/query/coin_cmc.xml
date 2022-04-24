@@ -22,12 +22,24 @@
 			 )
 		</foreach>
 		ON DUPLICATE KEY UPDATE
-			num_market_pairs = values(num_market_pairs), max_supply = values(max_supply), circulating_supply = values(circulating_supply),
-			total_supply = values(total_supply), cmc_rank = values(cmc_rank), last_updated = values(last_updated), price = values(price),
-			volume_24h = values(volume_24h), volume_change_24h = values(volume_change_24h), percent_change_1h = values(percent_change_1h),
-			percent_change_24h = values(percent_change_24h), percent_change_7d = values(percent_change_7d), percent_change_30d = values(percent_change_30d),
-			percent_change_60d = values(percent_change_60d), percent_change_90d = values(percent_change_90d), market_cap = values(market_cap),
-			market_cap_dominance = values(market_cap_dominance), fully_diluted_market_cap = values(fully_diluted_market_cap)
+			num_market_pairs = IF(name = values(name), values(num_market_pairs), num_market_pairs),
+			max_supply = IF(name = values(name), values(max_supply), max_supply),
+			circulating_supply = IF(name = values(name), values(circulating_supply), circulating_supply),
+			total_supply = IF(name = values(name), values(total_supply), total_supply),
+			cmc_rank = IF(name = values(name), values(cmc_rank), cmc_rank),
+			last_updated = IF(name = values(name), values(last_updated), last_updated),
+			price = IF(name = values(name), values(price), price),
+			volume_24h = IF(name = values(name), values(volume_24h), volume_24h),
+			volume_change_24h = IF(name = values(name), values(volume_change_24h), volume_change_24h),
+			percent_change_1h = IF(name = values(name), values(percent_change_1h), percent_change_1h),
+			percent_change_24h = IF(name = values(name), values(percent_change_24h), percent_change_24h),
+			percent_change_7d = IF(name = values(name), values(percent_change_7d), percent_change_7d),
+			percent_change_30d = IF(name = values(name), values(percent_change_30d), percent_change_30d),
+			percent_change_60d = IF(name = values(name), values(percent_change_60d), percent_change_60d),
+			percent_change_90d = IF(name = values(name), values(percent_change_90d), percent_change_90d),
+			market_cap = IF(name = values(name), values(market_cap), market_cap),
+			market_cap_dominance = IF(name = values(name), values(market_cap_dominance), market_cap_dominance),
+			fully_diluted_market_cap = IF(name = values(name), values(fully_diluted_market_cap), fully_diluted_market_cap)
 	</insert>
 
 	<delete id="deleteCoinInfo" >
